@@ -3,6 +3,9 @@
   "version": "3.0.0",
   "description": "AppendGrid - The dynamic table input JavaScript plugin",
   "main": "dist/AppendGrid.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "vite build",
     "start": "vite",
