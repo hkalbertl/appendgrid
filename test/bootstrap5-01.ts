@@ -1,8 +1,20 @@
 import { assert } from 'chai'
-import AppendGrid from '../src/index.js'
+import AppendGrid from '../src/index.ts'
+
+interface GridConfig {
+    id: string;
+    sizing: string | null;
+    grid: AppendGrid | null;
+}
+
+interface GridData {
+    uiFramework: string;
+    iconFramework: string;
+    list: GridConfig[];
+}
 
 describe('AppendGrid Bootstrap5', function () {
-    let gridData;
+    let gridData: GridData;
 
     beforeAll(function () {
         gridData = {
@@ -39,34 +51,34 @@ describe('AppendGrid Bootstrap5', function () {
         });
 
         it('should have 5 rows', function () {
-            assert.deepEqual(gridData.list[0].grid.getRowOrder(), [1, 2, 3, 4, 5]);
+            assert.deepEqual(gridData.list[0].grid!.getRowOrder(), [1, 2, 3, 4, 5]);
         });
     });
 
     describe('#appendRow', function () {
         it('should have 7 rows', function () {
-            let appendResult = gridData.list[0].grid.appendRow(2);
+            const appendResult: number[] = gridData.list[0].grid!.appendRow(2);
             assert.deepEqual(appendResult, [6, 7]);
-            assert.deepEqual(gridData.list[0].grid.getRowOrder(), [1, 2, 3, 4, 5, 6, 7]);
+            assert.deepEqual(gridData.list[0].grid!.getRowOrder(), [1, 2, 3, 4, 5, 6, 7]);
         });
     });
 
     describe('#removeRow', function () {
         it('should have 6 rows', function () {
-            gridData.list[0].grid.removeRow(3);
-            assert.deepEqual(gridData.list[0].grid.getRowOrder(), [1, 2, 3, 5, 6, 7]);
+            gridData.list[0].grid!.removeRow(3);
+            assert.deepEqual(gridData.list[0].grid!.getRowOrder(), [1, 2, 3, 5, 6, 7]);
         });
     });
 
     describe('#insertRow', function () {
         it('should have 8 rows', function () {
-            let insertResult = gridData.list[0].grid.insertRow([
+            const insertResult: number[] = gridData.list[0].grid!.insertRow([
                 { "foo": "3A", "bar": "2019-03-03" },
                 { "foo": "4A", "bar": "2019-04-04" }
             ], 3);
             assert.deepEqual(insertResult, [8, 9]);
-            assert.deepEqual(gridData.list[0].grid.getRowOrder(), [1, 2, 3, 8, 9, 5, 6, 7]);
-            assert.deepEqual(gridData.list[0].grid.getRowValue(3), { "foo": "3A", "bar": "2019-03-03" });
+            assert.deepEqual(gridData.list[0].grid!.getRowOrder(), [1, 2, 3, 8, 9, 5, 6, 7]);
+            assert.deepEqual(gridData.list[0].grid!.getRowValue(3), { "foo": "3A", "bar": "2019-03-03" });
         });
     });
 });

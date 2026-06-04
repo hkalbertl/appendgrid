@@ -4,7 +4,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    include: ['test/**/*.js']
+    include: ['test/**/*.ts']
   },
   server: {
     port: 9000,
@@ -12,7 +12,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: 'src/index.js',
+      entry: 'src/index.ts',
       name: 'AppendGrid',
       formats: ['umd'],
       fileName: () => 'AppendGrid.js'

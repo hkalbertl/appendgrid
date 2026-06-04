@@ -1,6 +1,4 @@
-// For development only!!
-// Add sample data to window object that used for initializing appendGrid.
-window.myAppendGridInitData = [{
+[{
     "uid": "d4c74a61-a24e-429f-9db0-3cf3aaa22425",
     "name": "Monique Zebedee",
     "company": "Welch LLC",
@@ -72,4 +70,4 @@ window.myAppendGridInitData = [{
     "orderPlaced": 875,
     "level": "Silver",
     "isNPO": false
-}];
+}]

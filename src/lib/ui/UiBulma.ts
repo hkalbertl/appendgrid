@@ -1,19 +1,28 @@
-﻿import * as Util from './ag-util';
-import UiBase from './ag-ui-base';
+import * as Util from '../util';
+import type { ButtonType, ColumnOption, I18nOptions, SectionClasses } from '../types';
+import type IconBase from '../icon/IconBase';
+import UiBase from './UiBase';
+
+interface BulmaParams {
+    useButtonGroup: boolean;
+    sectionClasses: Partial<SectionClasses> | null;
+    sizing: string;
+}
 
 class UiBulma extends UiBase {
-    constructor(uiParams, i18n, iconFramework) {
+    name: string;
+    protected uiParams: BulmaParams;
+
+    constructor(uiParams: Record<string, unknown> | null, i18n: I18nOptions, iconFramework: IconBase) {
         super(i18n, iconFramework);
         this.name = 'ui-bulma';
-        // Prepare default options
-        let libParams = {
+        const libParams: BulmaParams = {
             useButtonGroup: true,
             sectionClasses: null,
             sizing: 'normal'
         };
         Object.assign(libParams, uiParams);
-        // Prepare default section classes
-        let libSectionClasses = {
+        const libSectionClasses: Partial<SectionClasses> = {
             table: 'table',
             control: 'input',
             button: 'button',
@@ -26,22 +35,17 @@ class UiBulma extends UiBase {
             moveDown: '',
             empty: 'has-text-centered'
         };
-        // Apply sizing classes, if defined
         if (libParams.sizing === 'small') {
-            // For small
             libSectionClasses.table += ' is-narrow';
             libSectionClasses.control += ' is-small';
             libSectionClasses.button += ' is-small';
         } else if (libParams.sizing === 'medium') {
-            // For medium
             libSectionClasses.control += ' is-medium';
             libSectionClasses.button += ' is-medium';
         } else if (libParams.sizing === 'large') {
-            // For large
             libSectionClasses.control += ' is-large';
             libSectionClasses.button += ' is-large';
         }
-        // Override default classes if user defined
         if (libParams.sectionClasses) {
             Object.assign(libSectionClasses, libParams.sectionClasses);
         }
@@ -49,15 +53,13 @@ class UiBulma extends UiBase {
         this.uiParams = libParams;
     }
 
-    generateButton(holder, type, buttonId) {
-        // Create the button
-        let button = Util.createElem('button', buttonId, null, null, 'button');
+    generateButton(holder: HTMLElement, type: ButtonType, buttonId?: string): HTMLElement {
+        const button = Util.createElem('button', buttonId ?? null, null, null, 'button');
         button.title = this.i18n[type];
         Util.applyClasses(button,
             this.getSectionClasses('button'),
             this.getSectionClasses(type));
-        // Create related icon and append to button
-        let container = null;
+        let container: HTMLElement;
         if (this.iconFramework.isTextBased) {
             container = button;
         } else {
@@ -66,72 +68,55 @@ class UiBulma extends UiBase {
             button.appendChild(container);
         }
         this.iconFramework.generateIcon(container, type);
-        // Add wrapper if button group is used
         if (this.uiParams.useButtonGroup) {
-            let wrapper = document.createElement('p');
+            const wrapper = document.createElement('p');
             wrapper.classList.add('control');
             wrapper.appendChild(button);
             holder.appendChild(wrapper);
         } else {
             holder.appendChild(button);
         }
-        // Return button
         return button;
     }
 
-    createButtonGroup() {
+    createButtonGroup(): HTMLElement | null {
         if (this.uiParams.useButtonGroup) {
-            let group = document.createElement('div');
+            const group = document.createElement('div');
             Util.applyClasses(group, this.getSectionClasses('buttonGroup'));
             return group;
-        } else {
-            return super.createButtonGroup();
         }
+        return super.createButtonGroup();
     }
 
-    generateControl(ctrlHolder, columnOpt, ctrlId, ctrlName) {
-        let ctrl = null;
+    generateControl(ctrlHolder: HTMLElement | null, columnOpt: ColumnOption, ctrlId: string, ctrlName: string): HTMLElement {
+        let ctrl: HTMLElement;
         if (columnOpt.type === 'select') {
-            // Create wrapper
-            let wrapper = Util.createElem('div', null, null, 'select');
-            if (this.uiParams.sizing === 'small'){
+            const wrapper = Util.createElem('div', null, null, 'select');
+            if (this.uiParams.sizing === 'small') {
                 wrapper.classList.add('is-small');
-            } else if (this.uiParams.sizing === 'medium'){
+            } else if (this.uiParams.sizing === 'medium') {
                 wrapper.classList.add('is-medium');
-            } else if (this.uiParams.sizing === 'large'){
+            } else if (this.uiParams.sizing === 'large') {
                 wrapper.classList.add('is-large');
             }
-            ctrlHolder.appendChild(wrapper);
-            // Create select
+            ctrlHolder?.appendChild(wrapper);
             ctrl = super.generateControl(null, columnOpt, ctrlId, ctrlName);
-            // Apply classes
-		    Util.applyClasses(ctrl, columnOpt.ctrlClass);
-            // Add to holder
+            Util.applyClasses(ctrl, columnOpt.ctrlClass);
             wrapper.appendChild(ctrl);
         } else if (columnOpt.type === 'checkbox') {
-            // Create wrapper
-            let wrapper = Util.createElem('label', null, null, 'checkbox');
-            ctrlHolder.appendChild(wrapper);
-            // Create checkbox
+            const wrapper = Util.createElem('label', null, null, 'checkbox');
+            ctrlHolder?.appendChild(wrapper);
             ctrl = Util.createElem('input', ctrlId, ctrlName, null, 'checkbox');
-            ctrl.value = 1;
-            // Apply classes
-		    Util.applyClasses(ctrl, columnOpt.ctrlClass);
-            // Add to holder
+            (ctrl as HTMLInputElement).value = '1';
+            Util.applyClasses(ctrl, columnOpt.ctrlClass);
             wrapper.appendChild(ctrl);
         } else if (columnOpt.type === 'readonly') {
-            // Create a readonly text input without border
             ctrl = Util.createElem('input', ctrlId, ctrlName, null, 'text');
-            // Apply classes
             Util.applyClasses(ctrl, this.getSectionClasses('control'), columnOpt.ctrlClass);
-            // Add is-static class
             ctrl.classList.add('is-static');
-            // Set readonly
-            ctrl.readOnly = true;
-            // Add to holder
-            ctrlHolder.appendChild(ctrl);
+            (ctrl as HTMLInputElement).readOnly = true;
+            ctrlHolder?.appendChild(ctrl);
         } else {
-            // Create by using default control generation
             ctrl = super.generateControl(ctrlHolder, columnOpt, ctrlId, ctrlName);
         }
         return ctrl;

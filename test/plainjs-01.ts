@@ -1,8 +1,8 @@
 import { assert } from 'chai'
-import AppendGrid from '../src/index.js'
+import AppendGrid from '../src/index.ts'
 
 describe('AppendGrid PlainJS', function () {
-    let grid;
+    let grid: AppendGrid;
 
     beforeAll(function () {
         var domTable = document.createElement('table');

@@ -1,3 +1,8 @@
+## 3.0.0 (Jun 5, 2026)
+- Migrated source code to TypeScript for improved type safety and developer experience.
+- Renamed source files to PascalCase matching their exported class names, and reorganised into `icon/` and `ui/` subfolders.
+- Migrated Vite config and test files to TypeScript (`vite.config.ts`, `test/**/*.ts`).
+
 ## 2.1.1 (Dec 11, 2022)
 - Supported [FontAwesome 6](https://fontawesome.com/).
 

@@ -1,16 +1,15 @@
-﻿import * as Util from './ag-util';
-import IconBase from './ag-icon-base';
+import * as Util from '../util';
+import type { ButtonType } from '../types';
+import IconBase from './IconBase';
 
 class IconTypicons2 extends IconBase {
-    constructor(iconParams) {
+    constructor(iconParams?: Record<string, unknown> | null) {
         super('icon-typicons2');
-        // Prepare default options
-        let libParams = {
-            icons: null
+        const libParams = {
+            icons: null as Record<string, string> | null
         };
         Object.assign(libParams, iconParams);
-        // Set default CSS class as icon
-        let icons = {
+        const icons = {
             append: 'typcn typcn-plus',
             removeLast: 'typcn typcn-minus',
             insert: 'typcn typcn-arrow-back',
@@ -18,15 +17,14 @@ class IconTypicons2 extends IconBase {
             moveUp: 'typcn typcn-arrow-sorted-up',
             moveDown: 'typcn typcn-arrow-sorted-down'
         };
-        // Override default icons if defined
         if (libParams.icons) {
             Object.assign(icons, libParams.icons);
         }
         this.icons = icons;
     }
 
-    generateIcon(container, type) {
-        let icon = document.createElement('span');
+    generateIcon(container: HTMLElement, type: ButtonType): Node {
+        const icon = document.createElement('span');
         Util.applyClasses(icon, this.icons[type]);
         container.appendChild(icon);
         return icon;

@@ -1,17 +1,18 @@
-﻿import * as Util from './ag-util';
-import IconBase from './ag-icon-base';
+import * as Util from '../util';
+import type { ButtonType } from '../types';
+import IconBase from './IconBase';
 
 class IconBootstrapIcons extends IconBase {
-    constructor(iconParams) {
+    private baseUrl: string;
+
+    constructor(iconParams?: Record<string, unknown> | null) {
         super('icon-bootstrapicons');
-        // Prepare default options
-        let libParams = {
+        const libParams = {
             baseUrl: '',
-            icons: null
+            icons: null as Record<string, string> | null
         };
         Object.assign(libParams, iconParams);
-        // Set default CSS class as icon
-        let icons = {
+        const icons = {
             append: 'plus',
             removeLast: 'dash',
             insert: 'arrow-90deg-left',
@@ -19,7 +20,6 @@ class IconBootstrapIcons extends IconBase {
             moveUp: 'chevron-up',
             moveDown: 'chevron-down'
         };
-        // Override default icons if defined
         if (libParams.icons) {
             Object.assign(icons, libParams.icons);
         }
@@ -27,8 +27,8 @@ class IconBootstrapIcons extends IconBase {
         this.baseUrl = libParams.baseUrl;
     }
 
-    generateIcon(container, type) {
-        let icon = document.createElement('img');
+    generateIcon(container: HTMLElement, type: ButtonType): Node {
+        const icon = document.createElement('img') as HTMLImageElement;
         icon.src = this.baseUrl + this.icons[type] + '.svg';
         Util.applyClasses(icon, this.icons[type]);
         container.appendChild(icon);

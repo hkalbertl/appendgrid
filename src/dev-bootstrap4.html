@@ -63,9 +63,9 @@
     <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.13/js/gijgo.min.js"></script>
 
     <!-- Plugin initialization -->
-    <script src="/src/dev-data.js"></script>
     <script type="module">
-        import AppendGrid from '/src/index.js';
+        import AppendGrid from '/src/index.ts';
+        import initData from '/src/dev-data.json';
         $(function () {
             // Create instance of AppendGrid
             window.myAppendGrid = new AppendGrid({
@@ -240,8 +240,8 @@
                 maxNumRowsReached: function () {
                     alert('Max row reached!');
                 },
-                // Use sample data in `dev-data.js`, if loaded
-                initData: window.myAppendGridInitData || null
+                // Use sample data from dev-data.json
+                initData: initData
                 // initData: null
                 // initRows: 5
             });

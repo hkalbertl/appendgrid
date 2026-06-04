@@ -52,9 +52,9 @@
         integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg=" crossorigin="anonymous"></script>
 
     <!-- plugin initialization -->
-    <script src="/src/dev-data.js"></script>
     <script type="module">
-        import AppendGrid from '/src/index.js';
+        import AppendGrid from '/src/index.ts';
+        import initData from '/src/dev-data.json';
         $(function () {
             // Init foundation by using the guide here: https://foundation.zurb.com/sites/docs/installation.html
             $(document).foundation();
@@ -122,8 +122,8 @@
                     type: 'hidden',
                     value: '0'
                 }],
-                // Use sample data in `dev-data.js`, if loaded
-                initData: window.myAppendGridInitData || null
+                // Use sample data from dev-data.json
+                initData: initData
                 // initData: null
             });
             // Add button event
