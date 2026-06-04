@@ -1,15 +1,14 @@
-﻿import IconBase from './ag-icon-base';
+import type { ButtonType } from '../types';
+import IconBase from './IconBase';
 
 class IconOpenIconic extends IconBase {
-    constructor(iconParams) {
+    constructor(iconParams?: Record<string, unknown> | null) {
         super('icon-openiconic');
-        // Prepare default options
-        let libParams = {
-            icons: null
+        const libParams = {
+            icons: null as Record<string, string> | null
         };
         Object.assign(libParams, iconParams);
-        // Set dataset value as icon
-        let icons = {
+        const icons = {
             append: 'plus',
             removeLast: 'minus',
             insert: 'share',
@@ -17,17 +16,16 @@ class IconOpenIconic extends IconBase {
             moveUp: 'chevron-top',
             moveDown: 'chevron-bottom'
         };
-        // Override default icons if defined
         if (libParams.icons) {
             Object.assign(icons, libParams.icons);
         }
         this.icons = icons;
     }
 
-    generateIcon(container, type) {
-        let icon = document.createElement('span');
+    generateIcon(container: HTMLElement, type: ButtonType): Node {
+        const icon = document.createElement('span');
         icon.className = 'oi';
-        icon.dataset.glyph = this.icons[type];
+        icon.dataset.glyph = this.icons[type] ?? undefined;
         icon.setAttribute('aria-hidden', 'true');
         container.appendChild(icon);
         return icon;

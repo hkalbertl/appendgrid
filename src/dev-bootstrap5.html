@@ -7,8 +7,8 @@
     <title>AppendGrid - Bootstrap 5</title>
 
     <!--UI Framework Style Sheets-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-        integrity="sha256-wLz3iY/cO4e6vKZ4zRmo4+9XDpMcgKOvv/zEU3OMlRo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        integrity="sha256-2FMn2Zx6PuH5tdBQDRNwrOo60ts5wWPC9R8jK67b3t4=" crossorigin="anonymous">
 
     <!--Icon Webfont Frameworks-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css"
@@ -56,21 +56,19 @@
         </div>
     </form>
 
-    <!-- Add polyfill for legacy browsers (such as IE) -->
-    <script src="https://polyfill.io/v3/polyfill.min.js"></script>
-
     <!-- Add optional libraries -->
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-        integrity="sha384-Qg00WFl9r0Xr6rUqNLv1ffTSSKEFFCDCKVyHZ+sVt8KuvG99nWw5RNvbhuKgif9z"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js"
-        integrity="sha256-SIYbLg8Kyb12W8RgxT7zwNAeUMfrfld1XpKbc/0Q1hE=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha256-ew8UiV1pJH/YjpOEBInP1HxVvT/SfrCmwSoUzF9JIgc=" crossorigin="anonymous"></script>
     <!--
     <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.13/js/gijgo.min.js"></script>
     -->
 
     <!-- plugin initialization -->
-    <script>
+    <script type="module">
+        import AppendGrid from '/src/index.ts';
+        import initData from '/src/dev-data.json';
         $(function () {
             // Create instance of AppendGrid
             window.myAppendGrid = new AppendGrid({
@@ -248,8 +246,8 @@
                 maxNumRowsReached: function () {
                     alert('Max row reached!');
                 },
-                // Use sample data in `dev-data.js`, if loaded
-                initData: window.myAppendGridInitData || null
+                // Use sample data from dev-data.json
+                initData: initData
                 // initData: null
                 // initRows: 5
             });

@@ -1,19 +1,28 @@
-﻿import * as Util from './ag-util';
-import UiBase from './ag-ui-base';
+import * as Util from '../util';
+import type { ColumnOption, I18nOptions, SectionClasses } from '../types';
+import type IconBase from '../icon/IconBase';
+import UiBase from './UiBase';
+
+interface Bootstrap4Params {
+    useButtonGroup: boolean;
+    sectionClasses: Partial<SectionClasses> | null;
+    sizing: string;
+}
 
 class UiBootstrap4 extends UiBase {
-    constructor(uiParams, i18n, iconFramework) {
+    name: string;
+    protected uiParams: Bootstrap4Params;
+
+    constructor(uiParams: Record<string, unknown> | null, i18n: I18nOptions, iconFramework: IconBase) {
         super(i18n, iconFramework);
         this.name = 'ui-bootstrap4';
-        // Prepare default options
-        let libParams = {
+        const libParams: Bootstrap4Params = {
             useButtonGroup: true,
             sectionClasses: null,
             sizing: 'normal'
         };
         Object.assign(libParams, uiParams);
-        // Prepare default section classes
-        let libSectionClasses = {
+        const libSectionClasses: Partial<SectionClasses> = {
             table: 'table',
             thead: 'thead-light',
             control: 'form-control',
@@ -27,18 +36,14 @@ class UiBootstrap4 extends UiBase {
             moveDown: 'btn-outline-secondary',
             empty: 'text-center'
         };
-        // Apply sizing classes, if defined
         if (libParams.sizing === 'small') {
-            // For small
             libSectionClasses.table += ' table-sm';
             libSectionClasses.buttonGroup += ' btn-group-sm';
             libSectionClasses.control += ' form-control-sm';
         } else if (libParams.sizing === 'large') {
-            // For large
             libSectionClasses.buttonGroup += ' btn-group-lg';
             libSectionClasses.control += ' form-control-lg';
         }
-        // Override default classes if user defined
         if (libParams.sectionClasses) {
             Object.assign(libSectionClasses, libParams.sectionClasses);
         }
@@ -46,44 +51,33 @@ class UiBootstrap4 extends UiBase {
         this.uiParams = libParams;
     }
 
-    createButtonGroup() {
+    createButtonGroup(): HTMLElement | null {
         if (this.uiParams.useButtonGroup) {
-            let group = document.createElement('div');
+            const group = document.createElement('div');
             Util.applyClasses(group, this.getSectionClasses('buttonGroup'));
             return group;
-        } else {
-            return super.createButtonGroup();
         }
+        return super.createButtonGroup();
     }
 
-    generateControl(ctrlHolder, columnOpt, ctrlId, ctrlName) {
-        let ctrl = null;
+    generateControl(ctrlHolder: HTMLElement | null, columnOpt: ColumnOption, ctrlId: string, ctrlName: string): HTMLElement {
+        let ctrl: HTMLElement;
         if (columnOpt.type === 'checkbox') {
-            // Create wrapper
-            let wrapper = Util.createElem('div', null, null, 'form-check');
-            ctrlHolder.appendChild(wrapper);
-            // Create checkbox
+            const wrapper = Util.createElem('div', null, null, 'form-check');
+            ctrlHolder?.appendChild(wrapper);
             ctrl = Util.createElem('input', ctrlId, ctrlName, 'form-check-input position-static');
-            ctrl.type = 'checkbox';
-            ctrl.value = 1;
-            // Apply classes, no need to add `this.getSectionClasses('control')` as special element classes are added
-		    Util.applyClasses(ctrl, columnOpt.ctrlClass);
-            // Add to holder
+            (ctrl as HTMLInputElement).type = 'checkbox';
+            (ctrl as HTMLInputElement).value = '1';
+            Util.applyClasses(ctrl, columnOpt.ctrlClass);
             wrapper.appendChild(ctrl);
         } else if (columnOpt.type === 'readonly') {
-            // Create a readonly text input without border
             ctrl = Util.createElem('input', ctrlId, ctrlName, null, 'text');
-            // Apply classes
             Util.applyClasses(ctrl, this.getSectionClasses('control'), columnOpt.ctrlClass);
-            // Remove form-control and add form-control-plaintext
             ctrl.classList.remove('form-control');
             ctrl.classList.add('form-control-plaintext');
-            // Set readonly
-            ctrl.readOnly = true;
-            // Add to holder
-            ctrlHolder.appendChild(ctrl);
+            (ctrl as HTMLInputElement).readOnly = true;
+            ctrlHolder?.appendChild(ctrl);
         } else {
-            // Create by using default control generation
             ctrl = super.generateControl(ctrlHolder, columnOpt, ctrlId, ctrlName);
         }
         return ctrl;
