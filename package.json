@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hkalbertl/jquery.appendGrid"
+    "url": "https://github.com/hkalbertl/appendgrid"
   },
   "keywords": [
     "ui",
@@ -25,9 +25,9 @@
   "author": "Albert L. <hkalbertl@outlook.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hkalbertl/jquery.appendGrid/issues"
+    "url": "https://github.com/hkalbertl/appendgrid/issues"
   },
-  "homepage": "https://github.com/hkalbertl/jquery.appendGrid",
+  "homepage": "https://github.com/hkalbertl/appendgrid",
   "devDependencies": {
     "chai": "^6.2.2",
     "jsdom": "^27.0.1",
