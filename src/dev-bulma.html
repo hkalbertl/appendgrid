@@ -7,12 +7,12 @@
     <title>AppendGrid - Bulma</title>
 
     <!--UI Framework Style Sheets-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-        integrity="sha256-UDtbUHqpVVfXmdJcQVU/bfDEr9xldf3Dbd0ShD0Uf/Y=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+        integrity="sha256-Z/om3xyp6V2PKtx8BPobFfo9JCV0cOvBDMaLmquRS+4=" crossorigin="anonymous">
 
     <!--Icon Webfont Frameworks-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"
-        integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"
+        integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous">
     <!--
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.9/typicons.min.css"
         integrity="sha256-hmDtEnmZFvJ3zLsfobp03CSD3/qRCJmY3f7Vqf6zIgA=" crossorigin="anonymous" />
@@ -43,13 +43,12 @@
         <pre><code id="output"></code></pre>
     </form>
 
-    <!-- Add polyfill for legacy browsers (such as IE) -->
-    <script src="https://polyfill.io/v3/polyfill.min.js"></script>
-
     <!-- Add optional libraries -->
 
     <!-- plugin initialization -->
-    <script>
+    <script src="/src/dev-data.js"></script>
+    <script type="module">
+        import AppendGrid from '/src/index.js';
         document.addEventListener('DOMContentLoaded', function () {
             // Create instance of AppendGrid
             window.myAppendGrid = new AppendGrid({
@@ -60,7 +59,7 @@
                     // sectionClasses: { remove: 'btn-danger' },
                     sizing: 'small'
                 },
-                iconFramework: 'fontawesome5',
+                iconFramework: 'fontawesome6',
                 // iconFramework: 'materialdesignicons3',
                 // iconFramework: 'typicons2',
                 // iconFramework: 'openiconic',
@@ -98,7 +97,7 @@
                     display: 'Contact Person',
                     type: 'text',
                     ctrlAttr: { maxlength: 100 },
-                    ctrlCss: { backgroundColor: '#eeffee' }
+                    ctrlCss: { backgroundColor: '#eeffee', color: '#009900' }
                 }, {
                     name: 'country',
                     display: 'Country',

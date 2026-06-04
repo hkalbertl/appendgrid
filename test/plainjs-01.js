@@ -1,12 +1,16 @@
-describe('AppendGrid PlainJS', function () {
-    // Prepare table
-    var domTable = document.createElement('table');
-    domTable.id = 'tblAppendGrid';
-    document.body.appendChild(domTable);
-    document.body.className = 'container';
+import { assert } from 'chai'
+import AppendGrid from '../src/index.js'
 
-    describe('#init', function () {
-        window.myAppendGrid = new AppendGrid({
+describe('AppendGrid PlainJS', function () {
+    let grid;
+
+    beforeAll(function () {
+        var domTable = document.createElement('table');
+        domTable.id = 'tblAppendGrid';
+        document.body.appendChild(domTable);
+        document.body.className = 'container';
+
+        grid = new AppendGrid({
             element: domTable,
             uiFramework: 'default',
             iconFramework: 'default',
@@ -16,20 +20,22 @@ describe('AppendGrid PlainJS', function () {
             ],
             initRows: 5
         });
+    });
 
+    describe('#init', function () {
         it('should initialized', function () {
-            assert.isOk(myAppendGrid);
+            assert.isOk(grid);
         });
 
         it('should have 5 rows', function () {
-            assert.deepEqual(myAppendGrid.getRowOrder(), [1, 2, 3, 4, 5]);
+            assert.deepEqual(grid.getRowOrder(), [1, 2, 3, 4, 5]);
         });
     });
 
     describe('#appendRow', function () {
         it('should have 7 rows', function () {
-            myAppendGrid.appendRow(2);
-            assert.deepEqual(myAppendGrid.getRowOrder(), [1, 2, 3, 4, 5, 6, 7]);
+            grid.appendRow(2);
+            assert.deepEqual(grid.getRowOrder(), [1, 2, 3, 4, 5, 6, 7]);
         });
     });
 });

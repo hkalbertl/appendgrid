@@ -18,12 +18,12 @@ class UiBulma extends UiBase {
             control: 'input',
             button: 'button',
             buttonGroup: 'field has-addons',
-            append: 'is-outlined',
-            removeLast: 'is-outlined',
-            insert: 'is-outlined',
-            remove: 'is-outlined',
-            moveUp: 'is-outlined',
-            moveDown: 'is-outlined',
+            append: '',
+            removeLast: '',
+            insert: '',
+            remove: '',
+            moveUp: '',
+            moveDown: '',
             empty: 'has-text-centered'
         };
         // Apply sizing classes, if defined

@@ -52,7 +52,9 @@
         integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg=" crossorigin="anonymous"></script>
 
     <!-- plugin initialization -->
-    <script>
+    <script src="/src/dev-data.js"></script>
+    <script type="module">
+        import AppendGrid from '/src/index.js';
         $(function () {
             // Init foundation by using the guide here: https://foundation.zurb.com/sites/docs/installation.html
             $(document).foundation();

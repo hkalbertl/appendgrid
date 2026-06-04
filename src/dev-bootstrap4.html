@@ -63,7 +63,9 @@
     <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.13/js/gijgo.min.js"></script>
 
     <!-- Plugin initialization -->
-    <script>
+    <script src="/src/dev-data.js"></script>
+    <script type="module">
+        import AppendGrid from '/src/index.js';
         $(function () {
             // Create instance of AppendGrid
             window.myAppendGrid = new AppendGrid({
