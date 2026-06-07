@@ -75,7 +75,7 @@ export interface ColumnOption {
     displayCss?: Record<string, string> | null;
     displayClass?: string | null;
     displayTooltip?: string | null;
-    headerSpan: number;
+    headerSpan?: number;
     cellCss?: Record<string, string> | null;
     cellClass?: string | null;
     ctrlAttr?: Record<string, string> | null;
@@ -83,7 +83,7 @@ export interface ColumnOption {
     ctrlCss?: Record<string, string> | null;
     ctrlClass?: string | null;
     ctrlOptions?: CtrlOptionsType | null;
-    invisible: boolean;
+    invisible?: boolean;
     emptyCriteria?: string | number | boolean | ((value: unknown) => boolean) | null;
     customBuilder?: ((cell: HTMLTableCellElement, idPrefix: string, name: string, uniqueIndex: number) => HTMLElement) | null;
     customGetter?: ((idPrefix: string, name: string, uniqueIndex: number) => unknown) | null;

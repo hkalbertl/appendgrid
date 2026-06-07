@@ -1,4 +1,4 @@
-import { assert } from 'chai'
+import { assert } from 'vitest'
 import AppendGrid from '../src/index.ts'
 
 describe('AppendGrid PlainJS', function () {

@@ -1,5 +1,6 @@
 import IconDefault from './icon/IconDefault';
 import IconBootstrapIcons from './icon/IconBootstrapIcons';
+import IconFontAwesome7 from './icon/IconFontAwesome7';
 import IconFontAwesome6 from './icon/IconFontAwesome6';
 import IconFontAwesome5 from './icon/IconFontAwesome5';
 import IconMaterialDesignIcons3 from './icon/IconMaterialDesignIcons3';
@@ -51,6 +52,8 @@ class GridCore {
 
         if (settings.iconFramework === 'bootstrapicons') {
             self.iconFramework = new IconBootstrapIcons(settings.iconParams);
+        } else if (settings.iconFramework === 'fontawesome7') {
+            self.iconFramework = new IconFontAwesome7(settings.iconParams);
         } else if (settings.iconFramework === 'fontawesome6') {
             self.iconFramework = new IconFontAwesome6(settings.iconParams);
         } else if (settings.iconFramework === 'fontawesome5') {
@@ -126,9 +129,10 @@ class GridCore {
                         (tbCell.style as unknown as Record<string, string>)[styleName] = displayCss[styleName];
                     }
                 }
-                if (settings.columns[z].headerSpan > 1) {
-                    tbCell.setAttribute('colSpan', String(settings.columns[z].headerSpan));
-                    pendingSkipCol = settings.columns[z].headerSpan - 1;
+                const headerSpan = settings.columns[z].headerSpan ?? 1;
+                if (headerSpan > 1) {
+                    tbCell.setAttribute('colSpan', String(headerSpan));
+                    pendingSkipCol = headerSpan - 1;
                 }
                 if (typeof settings.columns[z].display === 'function') {
                     (settings.columns[z].display as (cell: HTMLTableCellElement) => void)(tbCell as HTMLTableCellElement);
