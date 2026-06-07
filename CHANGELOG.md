@@ -1,7 +1,12 @@
+## 3.0.1 (Jun 8, 2026)
+- Included TypeScript declaration file (`dist/AppendGrid.d.ts`) for use in TypeScript projects.
+- Supported [FontAwesome 7](https://fontawesome.com/).
+
 ## 3.0.0 (Jun 5, 2026)
 - Migrated source code to TypeScript for improved type safety and developer experience.
 - Renamed source files to PascalCase matching their exported class names, and reorganised into `icon/` and `ui/` subfolders.
-- Migrated Vite config and test files to TypeScript (`vite.config.ts`, `test/**/*.ts`).
+- Replaced Webpack with Vite, reducing the transpiled file size by half (from ~52 kB to ~26 kB).
+- Dropped Webpack and its related plugins, significantly reducing the number of development dependencies.
 
 ## 2.1.1 (Dec 11, 2022)
 - Supported [FontAwesome 6](https://fontawesome.com/).
