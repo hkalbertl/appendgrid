@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hkalbertl/appendgrid"
+    "url": "git+https://github.com/hkalbertl/appendgrid.git"
   },
   "keywords": [
     "ui",
@@ -34,10 +34,10 @@
   "homepage": "https://github.com/hkalbertl/appendgrid",
   "devDependencies": {
     "dts-bundle-generator": "^9.5.1",
-    "jsdom": "^29.1.1",
-    "terser": "^5.48.0",
+    "jsdom": "^30.1.1",
+    "terser": "^5.51.2",
     "typescript": "^6.0.3",
-    "vite": "^8.0.16",
-    "vitest": "^4.1.8"
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
   }
 }
