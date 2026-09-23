@@ -4,7 +4,7 @@
 
 
 ## About versions
-The project was originally named "jquery.appendGrid" because [version 1](../../tree/v1-dev) required jQuery, but jQuery is no longer required since [version 2](../../tree/v2-dev). The GitHub repository will be renamed to "appendgrid" to better reflect the current state of the project. GitHub will automatically redirect the old URL, so existing links and clones will continue to work.
+The project was originally named "jquery.appendGrid" because [version 1](../../tree/v1-dev) required jQuery, but jQuery is no longer required since [version 2](../../tree/v2-dev). The GitHub repository is renamed to "appendgrid" to better reflect the current state of the project. GitHub will automatically redirect the old URL, so existing links and clones will continue to work.
 
 Starting from [version 3](../../tree/v3-dev), the source code has been migrated to TypeScript for improved type safety and developer experience.
 
